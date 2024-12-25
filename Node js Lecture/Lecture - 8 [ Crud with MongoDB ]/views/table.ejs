@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div align="center">
+        <h2>View Page</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>PassWord</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.map((val,index)=> { %>
+                    <tr>
+                        <td>
+                            <%= ++index %>
+                        </td>
+                        <td>
+                            <%= val.name %>
+                        </td>
+                        <td>
+                            <%= val.email %>
+                        </td>
+                        <td>
+                            <%= val.password %>
+                        </td>
+                        <td>
+                            <img src="<%= val.image %>" width="100">
+                        </td>
+                        <td>
+                            <a href="/deleteRecord?deleteId=<%= val.id %> ">Delete</a> ||
+                            <a href="/editRecord?editId=<%= val.id %> ">Edit</a>
+                        </td>
+                    </tr>
+
+                    <% }) %>
+            </tbody>
+        </table>
+        <a href="/add">add</a>
+    </div>
+
+</body>
+
+</html>

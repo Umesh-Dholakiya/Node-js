@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Page</title>
+</head>
+
+<body>
+
+    <div align="center">
+        <h2>Edit Record</h2>
+
+        <form action="/updateRecord" method="post">
+            <table>
+                
+                <tr>
+                    <td><input type="text" value="<%= single.id %>" name="editid" ></td>
+                </tr>
+                <tr>
+                    <td> Name :</td>
+                    <td><input type="text" name="name" value="<%= single.name %>" ></td>
+                </tr>
+                <tr>
+                    <td> Email : </td>
+                    <td><input type="email" name="email" value="<%= single.email %>"></td>
+                </tr>
+                <tr>
+                    <td>Password : </td>
+                    <td><input type="password" name="password" value="<%= single.password %>" ></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit"></td>
+                </tr>
+            </table> 
+            <br>
+            <a href="/">View</a>
+        </form>
+    </div>
+
+</body>
+
+</html>
