@@ -60,7 +60,6 @@ app.get('/', (req, res) => {
 })
 app.post('/insertDetail', fileUplad, (req, res) => {
 
-    // console.log(req.body);
     const { name, description, price} = req.body
     UserModel.create({
         name: name,

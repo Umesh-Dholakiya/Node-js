@@ -9,9 +9,9 @@
   <style>
     .navbar {
       width: 100%;
-      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      background: #EDF4F2;
       /* Gradient color combination */
-      color: white;
+      color: #31473A;
       padding: 10px 20px;
       display: flex;
       justify-content: space-between;
@@ -33,25 +33,23 @@
     }
 
     .navbar a {
-      color: white;
+      color: #31473A;
+      font-weight: 700;
       text-decoration: none;
       padding: 8px 15px;
       border-radius: 5px;
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       transition: background-color 0.3s, transform 0.2s;
     }
 
     .navbar a:hover {
       background-color: rgba(255, 255, 255, 0.2);
-      /* Slightly transparent hover effect */
       transform: scale(1.1);
-      /* Subtle zoom effect */
     }
 
     .navbar a:active {
       background-color: rgba(255, 255, 255, 0.3);
-      /* Highlighted effect on click */
     }
   </style>
 </head>
@@ -68,7 +66,7 @@
 
   <div class="w-50 mx-auto ">
     <div class="border rounded">
-      <header style="padding: 10px 0; background-color: #1e3c72; color: aliceblue;">
+      <header style="padding: 10px 0; background-color: #EDF4F2; color: #31473A;">
         <h2 align="center">Add New Movie</h2>
       </header>
       <form class="p-4 " action="/insertDetail" method="post" enctype="multipart/form-data">
@@ -90,7 +88,7 @@
           <input type="file" class="form-control" name="image">
         </div>
         <button type="submit" class="btn"
-          style="width: 200px; padding: 10px 0; margin-top: 20px; background-color: #1e3c72; color: aliceblue;">Add Movie
+          style="width: 200px; padding: 10px 0; margin-top: 20px; background-color: #EDF4F2; color: #38413b; font-weight: 700;">Book Movie Ticket
           </button>
       </form>
     </div>
