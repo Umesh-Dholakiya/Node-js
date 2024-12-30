@@ -1,0 +1,62 @@
+<%- include('Header') %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog</title>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center justify-content-between">
+                    <h4 class="page-title">Edit Blog</h4>
+                    <button class="btn btn-primary">
+                        <a class="text-light" href="/admin">Show</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card card-hover">
+                        <div class="box bg-light">
+                            <form class="p-4" action="/updateBlog" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label class="form-label">Title:</label>
+                                    <input type="text" class="form-control" name="title" value="<%= single.title %>" required>
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label class="form-label">Description:</label>
+                                    <textarea class="form-control" name="description" required><%= single.description %></textarea>
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label class="form-label">Author:</label>
+                                    <input type="text" class="form-control" name="author" value="<%= single.author %>" required>
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label class="form-label">Image:</label>
+                                    <input type="file" class="form-control" name="image">
+                                </div>
+                            
+                                <input type="hidden" name="editid" value="<%= single._id %>">
+                                <button type="submit" class="btn btn-primary">Update Blog</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<%- include('Footer') %>

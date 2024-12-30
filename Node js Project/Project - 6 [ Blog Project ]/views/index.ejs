@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Blog App</title>
+    <link href="https://cdn.materialdesignicons.com/6.5.95/css/materialdesignicons.min.css" rel="stylesheet">
+    <!-- Ensure MDI icons are loaded -->
+    <link href="./dist/css/style.min.css" rel="stylesheet">
+    <style>
+        /* Blog Card Container */
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1340px;
+            justify-content: center;
+            margin-left: 22%;
+        }
+        .blog-card {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #fff;
+            margin: 15px;
+        }
+
+        /* Image Section */
+        .blog-card .image {
+            height: 60%;
+            overflow: hidden;
+        }
+
+        .blog-card .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        /* Content Section */
+        .blog-card .content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 40%;
+        }
+
+        .blog-card .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 8px;
+        }
+
+        .blog-card .date {
+            font-size: 14px;
+            color: #888;
+            margin: 0 0 8px;
+        }
+
+        .blog-card .description {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 10px;
+        }
+
+        /* Read More Button */
+        .blog-card .read-more {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #6f856b;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .blog-card .read-more:hover {
+            background-color: #588251;
+        }
+
+        /* Hover Effects */
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-card:hover .image img {
+            transform: scale(1.1);
+        }
+
+        .blog-posts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin5">
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
+                    <a class="navbar-brand align-items-center" href="/index">
+                        <b class="logo-icon p-l-10">
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <span class="logo-text">
+                            <h3 class="m-0">BlogCanvas</h3>
+                        </span>
+                    </a>
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                            class="ti-more"></i></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav float-left mr-auto">
+                        <li class="nav-item d-none d-md-block"><a
+                                class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
+                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                    </ul>
+                    <div>
+                        <form action="/logout" method="POST" style="display: inline;">
+                            <button type="submit" class="btn btn-danger text-light">LogOut</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/" aria-expanded="false">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span class="hide-menu"> Dashboard </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/add"
+                                aria-expanded="false">
+                                <i class="mdi mdi-plus-box"></i>
+                                <span class="hide-menu"> Add Blogs</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin"
+                                aria-expanded="false">
+                                <i class="mdi mdi-chart-bubble"></i>
+                                <span class="hide-menu"> Show Blogs</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <section id="blog">
+            <div class="container">
+                <h2 align="center" style="margin-top: 3%;">Latest Blog Posts</h2>
+                <div class="blog-posts">
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/173301/pexels-photo-173301.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Exploring Urban Art</h3>
+                            <p class="date">December 30, 2024</p>
+                            <p class="description">Discover the vibrancy of city life with this captivating street
+                                mural, blending creativity and culture.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <!-- Additional Blog Cards -->
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Nature's Serenity</h3>
+                            <p class="date">December 28, 2024</p>
+                            <p class="description">Take a break from the city and immerse yourself in the calming beauty
+                                of nature.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Architectural Marvels</h3>
+                            <p class="date">December 25, 2024</p>
+                            <p class="description">Explore the intricacies of ancient and modern architecture that shape
+                                our world.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Culinary Adventures</h3>
+                            <p class="date">December 20, 2024</p>
+                            <p class="description">Dive into the world of flavors with a culinary journey across
+                                continents.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/355952/pexels-photo-355952.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Technological Innovations</h3>
+                            <p class="date">December 18, 2024</p>
+                            <p class="description">Discover the latest trends in technology and how they are shaping our
+                                future.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Adventure Awaits</h3>
+                            <p class="date">December 15, 2024</p>
+                            <p class="description">Gear up for thrilling adventures that take you to the edge of
+                                excitement.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">The Feline Chronicles</h3>
+                            <p class="date">December 10, 2024</p>
+                            <p class="description">Explore the world through the eyes of our adorable feline friends.
+                            </p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/260689/pexels-photo-260689.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Cultural Extravaganza</h3>
+                            <p class="date">December 5, 2024</p>
+                            <p class="description">Dive into the richness of diverse cultures from around the globe.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="image">
+                            <img src="https://images.pexels.com/photos/2228585/pexels-photo-2228585.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                alt="Blog image">
+                        </div>
+                        <div class="content">
+                            <h3 class="title">The Hero Within</h3>
+                            <p class="date">December 30, 2024</p>
+                            <p class="description">A vibrant yellow flower in a mug with the empowering quote, symbolizing self-belief and inner strength.</p>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    </div>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+
+    <script src="dist/js/waves.js"></script>
+    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="dist/js/custom.min.js"></script>
+
+    <script src="assets/libs/flot/excanvas.js"></script>
+    <script src="assets/libs/flot/jquery.flot.js"></script>
+    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+</body>
+
+</html>
