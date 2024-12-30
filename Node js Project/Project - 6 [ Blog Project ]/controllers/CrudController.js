@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // Add blog page (render form)
 const AddBlog = (req, res) => {
-    return res.render('Addblog'); // Fix 're.render' to 'res.render'
+    return res.render('Addblog'); 
 };
 
 // Show all blogs
@@ -28,8 +28,8 @@ const insertBlog = async (req, res) => {
             image: req.file ? req.file.path : '' 
         });
 
-        await newBlog.save();  // Save the new blog
-        console.log("Blog Added successfully");
+        await newBlog.save(); 
+        console.log("New blog post published successfully");
         return res.redirect('/admin');
     } catch (err) {
         console.log(err);
@@ -44,7 +44,7 @@ const deleteBlog = async (req, res) => {
         let single = await BlogModel.findById(deid);
         fs.unlinkSync(single.image);
         await BlogModel.findByIdAndDelete(deid);
-        console.log("Deleted..");
+        console.log("The blog post has been removed successfully.");
         return res.redirect('/admin');
     } catch (error) {
         console.log(error);
@@ -77,7 +77,7 @@ const UpdateBlog = async (req, res) => {
                 author: author, 
                 image: req.file.path
             });
-            console.log("Updated..");
+            console.log("Blog updated! Your revisions are now live.");
             return res.redirect('/admin');
         } else {
             const single = await BlogModel.findById(editid);
@@ -87,7 +87,7 @@ const UpdateBlog = async (req, res) => {
                 author: author, 
                 image: single.image
             });
-            console.log("Updated..");
+            console.log("Blog updated! Your revisions are now live.");
             return res.redirect('/admin');
         }
     } catch (err) {
