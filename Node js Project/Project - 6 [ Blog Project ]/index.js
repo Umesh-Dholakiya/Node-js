@@ -1,29 +1,36 @@
 const express = require("express");
 const connectDB = require("./config/db");
-const app = express()
-const port = 8080 ;
-connectDB()
+const path = require("path"); // Ensure this is declared at the top
+const cookieParser = require("cookie-parser");
 
-app.set('view engine','ejs')
-const path = require('path');
+const app = express();
+const port = 8080;
 
+// Connect to the database
+connectDB();
 
-const cookieParser = require('cookie-parser')
+// Set the view engine to EJS
+app.set("view engine", "ejs");
+
+// Define the views directory explicitly
+app.set("views", path.join(__dirname, "views"));
+
+// Middleware
 app.use(cookieParser());
-
-app.use(express.static(path.join(__dirname, 'public')))
-
-
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true })); // Use `extended: true` for parsing nested objects
 app.use(express.json());
 
-app.use('/uploads',express.static(path.join(__dirname,"uploads")));
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
 
+// Serve static files from the "uploads" directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use('/',require('./routes/indexRoutes'))
+// Define routes
+app.use("/", require("./routes/indexRoutes"));
 
-app.listen(port,(err) =>{
-    if(err) console.log(err);
-
-    console.log(`server is running on port ${port}`)
-})
+// Start the server
+app.listen(port, (err) => {
+    if (err) console.error("Error starting server:", err);
+    console.log(`Server is running on port ${port}`);
+});

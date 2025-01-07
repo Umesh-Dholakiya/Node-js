@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { AddBlog, showblog, insertBlog, deleteBlog, editBlog, UpdateBlog, indexPage  } = require('../controllers/CrudController');
+const { AddBlog, insertBlog, deleteBlog, editBlog, UpdateBlog, readmore  } = require('../controllers/CrudController');
 
 const routes = express.Router();
 
@@ -15,14 +15,12 @@ const st = multer.diskStorage({
 });
 
 const fileupload = multer({ storage: st }).single('image');
-routes.get('/index' , indexPage)
 routes.get('/add', AddBlog);
-routes.get('/admin', showblog);
-
 routes.post('/insertblog', fileupload, insertBlog);
 routes.get('/deleteblog', deleteBlog);
 routes.get('/editblog', editBlog);
 routes.post('/Updateblog', fileupload, UpdateBlog);
+routes.get('/readmore', readmore);
 
 
 module.exports = routes;

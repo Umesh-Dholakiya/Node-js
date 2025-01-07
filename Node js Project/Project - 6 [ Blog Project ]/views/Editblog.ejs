@@ -1,10 +1,10 @@
 <%- include('Header') %>
-    <div class="page-wrapper">
-        <h1 class="page-title text-center pt-5">Modify Blog Content</h1>
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card card-hover">
+        <div class="page-wrapper">
+            <h1 class="text-center mb-4 pt-4">Modify Blog Content</h1>
+            <div class="container-fluid">
+                <div class="row justify-content-center ">
+                    <div class="col-md-6">
+                        <div class="card card-hover">
                         <div class="box bg-light">
                             <form class="p-4" action="/updateBlog" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
@@ -14,7 +14,7 @@
                             
                                 <div class="mb-3">
                                     <label class="form-label">Description:</label>
-                                    <textarea class="form-control h-50" name="description" required><%= single.description %></textarea>
+                                    <textarea class="form-control" name="description" required><%= single.description %></textarea>
                                 </div>
                             
                                 <div class="mb-3">

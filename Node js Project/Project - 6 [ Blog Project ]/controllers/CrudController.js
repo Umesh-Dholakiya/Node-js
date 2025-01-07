@@ -3,18 +3,7 @@ const fs = require('fs');
 
 // Add blog page (render form)
 const AddBlog = (req, res) => {
-    return res.render('Addblog'); 
-};
-
-// Show all blogs
-const showblog = async (req, res) => {
-    try {
-        const blog = await BlogModel.find();
-        res.render('showblog', { blog: blog });
-    } catch (err) {
-        console.log(err);
-        return false;
-    }
+    return res.render('Addblog');
 };
 
 // Insert a new blog
@@ -24,13 +13,13 @@ const insertBlog = async (req, res) => {
         const newBlog = new BlogModel({
             title: title,
             description: description,
-            author: author,  
-            image: req.file ? req.file.path : '' 
+            author: author,
+            image: req.file ? req.file.path : ''
         });
 
-        await newBlog.save(); 
+        await newBlog.save();  
         console.log("New blog post published successfully");
-        return res.redirect('/admin');
+        return res.redirect('/dashboard');
     } catch (err) {
         console.log(err);
         return false;
@@ -45,7 +34,7 @@ const deleteBlog = async (req, res) => {
         fs.unlinkSync(single.image);
         await BlogModel.findByIdAndDelete(deid);
         console.log("The blog post has been removed successfully.");
-        return res.redirect('/admin');
+        return res.redirect('/dashboard');
     } catch (error) {
         console.log(error);
         return false;
@@ -70,25 +59,25 @@ const UpdateBlog = async (req, res) => {
         const { editid, title, description, author } = req.body;
         if (req.file) {
             const single = await BlogModel.findById(editid);
-            fs.unlinkSync(single.image); 
+            fs.unlinkSync(single.image);
             await BlogModel.findByIdAndUpdate(editid, {
                 title: title,
                 description: description,
-                author: author, 
+                author: author,
                 image: req.file.path
             });
             console.log("Blog updated! Your revisions are now live.");
-            return res.redirect('/admin');
+            return res.redirect('/dashboard');
         } else {
             const single = await BlogModel.findById(editid);
             await BlogModel.findByIdAndUpdate(editid, {
                 title: title,
                 description: description,
-                author: author, 
+                author: author,
                 image: single.image
             });
             console.log("Blog updated! Your revisions are now live.");
-            return res.redirect('/admin');
+            return res.redirect('/dashboard');
         }
     } catch (err) {
         console.log(err);
@@ -96,22 +85,34 @@ const UpdateBlog = async (req, res) => {
     }
 };
 
-// Index page (home page)
-const indexPage = (req, res) => {
+const readmore = async (req, res) => {
     try {
-        return res.render('index');
+        const id = req.query.readmoreId; 
+        if (!id) {
+            console.log("No ID provided in query");
+            return res.status(400).send("Invalid request: ID is required");
+        }
+
+        const single = await BlogModel.findById(id); 
+        if (!single) {
+            console.log(`No record found for ID: ${id}`);
+            return res.status(404).send("Blog not found");
+        }
+
+        res.render('readmore', { single }); 
     } catch (err) {
-        console.log(err);
-        return false;
+        console.error("Error in readmore function:", err);
+        res.status(500).send("Internal Server Error");
     }
 };
 
+
+
 module.exports = {
     AddBlog,
-    showblog,
     insertBlog,
     deleteBlog,
     editBlog,
     UpdateBlog,
-    indexPage
+    readmore
 };
