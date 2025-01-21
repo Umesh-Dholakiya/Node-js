@@ -1,0 +1,132 @@
+<%- include('Header') %>
+
+    <section id="blog">
+        <% if (blogs.length===0) { %>
+            <h2 align="center" style="margin-top: 3%;">No Blog Added on Dashboard</h2>
+            <% } else { %>
+                <h2 align="center" style="margin-top: 3%;">Blog Repository</h2>
+                <div class="container">
+                    <% blogs.map((blog)=> { %>
+                        <div class="blog-posts h-100 ">
+                            <div class="blog-card h-100">
+                                <div class="image">
+                                    <img src="<%= blog?.image %>" alt="Blog image">
+                                </div>
+                                <div class="content">
+                                    <h3 class="title">
+                                        <%= blog?.title %>
+                                    </h3>
+                                    <p class="author">
+                                        <%= blog?.author %>
+                                    </p>
+                                    <p class="description">
+                                        <%= blog?.description.slice(0, 90) %>...
+                                    </p>
+                                    <a href="/readmore?readmoreId=<%= blog?.id %>" class="read-more">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+                <% } %>
+    </section>
+
+    <%- include('Footer') %>
+
+        <style>
+            /* Blog Card Container */
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                max-width: 1340px;
+                justify-content: center;
+            }
+
+            .blog-card {
+                width: 400px;
+                height: 500px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s, box-shadow 0.3s;
+                background-color: #fff;
+                margin: 15px;
+            }
+
+            /* Image Section */
+            .blog-card .image {
+                height: 60%;
+                overflow: hidden;
+            }
+
+            .blog-card .image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s;
+            }
+
+            /* Content Section */
+            .blog-card .content {
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 40%;
+            }
+
+            .blog-card .title {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 0 0 8px;
+            }
+
+            .blog-card .date {
+                font-size: 14px;
+                color: #888;
+                margin: 0 0 8px;
+            }
+
+            .blog-card .description {
+                font-size: 14px;
+                color: #555;
+                margin: 0 0 10px;
+            }
+
+            /* Read More Button */
+            .blog-card .read-more {
+                display: inline-block;
+                padding: 8px 12px;
+                background-color: #6f856b;
+                color: #fff;
+                text-decoration: none;
+                font-size: 14px;
+                border-radius: 5px;
+                text-align: center;
+                transition: background-color 0.3s;
+            }
+
+            .blog-card .read-more:hover {
+                background-color: #588251;
+            }
+
+            /* Hover Effects */
+            .blog-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .blog-card:hover .image img {
+                transform: scale(1.1);
+            }
+
+            .blog-posts {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+        </style>

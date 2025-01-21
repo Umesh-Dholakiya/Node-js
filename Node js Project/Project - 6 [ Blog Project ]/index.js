@@ -31,6 +31,8 @@ app.use("/", require("./routes/indexRoutes"));
 
 // Start the server
 app.listen(port, (err) => {
-    if (err) console.error("Error starting server:", err);
+    if (err) { 
+        console.error("Error starting server:", err); 
+    }
     console.log(`Server is running on port ${port}`);
 });
