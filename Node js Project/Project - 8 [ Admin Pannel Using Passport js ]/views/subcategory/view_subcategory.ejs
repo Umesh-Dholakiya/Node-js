@@ -1,0 +1,83 @@
+<%- include('../header') %>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Subcategory Table</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Author</th>
+                                    <th>Email</th>
+                                    <th>Function</th>
+                                    <th>Employee Date</th>
+                                    <th>Salary</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Subcategory</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% subcategory.map((subcat,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= subcat.author %>
+                                        </td>
+                                        <td>
+                                            <%= subcat.email %>
+                                        </td>
+                                        <td>
+                                            <%= subcat.function %>
+                                        </td>
+                                        <td>
+                                            <%= subcat.employed %>
+                                        </td>
+                                        <td>
+                                            <%= subcat.salary %>
+                                        </td>
+                                        <td>
+                                            <% if(subcat?.status==="Online" ) { %>
+                                                <a href="/subcategory/changestatus?id=<%= subcat?.id %>&status=Offline"
+                                                    class="btn btn-success btn-sm">
+                                                    <%= subcat?.status %>
+                                                </a>
+                                                <% } else { %>
+                                                    <a href="/subcategory/changestatus?id=<%= subcat?.id %>&status=Online"
+                                                        class="btn btn-danger btn-sm">
+                                                        <%= subcat?.status %>
+                                                    </a>
+                                                    <% } %>
+                                        </td>
+                                        <td>
+                                            <%= subcat?.categoryId?.category %>
+                                        </td>
+                                        <td>
+                                            <%= subcat?.subcategory %>
+                                        </td>
+                                        <td>
+                                            <a href="/subcategory/deletesubcategory?id=<%= subcat?.id %>"
+                                                class="btn btn-danger btn-sm">Delete</a>
+
+
+                                            <a href="/subcategory/editsubcategory?id=<%= subcat?.id %>"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../footer') %>
+
+
+       

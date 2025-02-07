@@ -1,0 +1,139 @@
+<%- include('../header') %>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Add Exsubcategory</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="/exsubcategory/insertexsubcategory" method="post">
+                            <label for="Author" class="form-label">Employee Name</label>
+                            <input type="text" name="author" class="form-control" placeholder="Enter Employee Name"
+                                required>
+
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+
+                            <label for="Function" class="form-label">Function</label>
+                            <input type="text" name="function" class="form-control" placeholder="Enter Function"
+                                required>
+
+                            <label for="Employed" class="form-label">Employed Date</label>
+                            <input type="date" name="employed" class="form-control">
+
+                            <label for="Salary" class="form-label">Salary</label>
+                            <input type="number" name="salary" class="form-control" placeholder="Enter Salary">
+
+                            <label for="Category" class="form-label">Category</label>
+                            <select name="category" id="category" class="form-control" onchange="categoryRecord()"
+                                required>
+                                <option value="">---Select Category---</option>
+                                <% category.forEach((cat)=> { %>
+                                    <option value="<%= cat._id %>">
+                                        <%= cat.category %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+
+                            <label for="Subcategory" class="form-label">Subcategory</label>
+                            <select name="subcategory" id="subcategory" class="form-control" required>
+                                <option value="">---Select Subcategory---</option>
+                            </select>
+
+                            <label for="Exsubcategory" class="form-label">Exsubcategory</label>
+                            <input type="text" name="exsubcategory" class="form-control"
+                                placeholder="Enter Exsubcategory" required>
+
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const categoryRecord = () => {
+            let categoryid = document.getElementById('category').value;
+            if (!categoryid) return;
+
+            $.ajax({
+                type: "GET",
+                url: `/exsubcategory/ajaxcategorywiserecord?categoryId=${categoryid}`,
+                success: function (res) {
+                    let subcategory = res.subcategory;
+                    let options = '<option value="">---Select Subcategory---</option>';
+
+                    subcategory.forEach(cat => {
+                        options += `<option value="${cat._id}">${cat.subcategory}</option>`;
+                    });
+
+                    document.getElementById('subcategory').innerHTML = options;
+                },
+                error: function () {
+                    console.error("Error fetching subcategories");
+                }
+            });
+        }
+    </script>
+
+    <%- include('../footer') %>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container-fluid {
+                padding: 20px;
+            }
+
+            .card {
+                border-radius: 12px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                background: white;
+            }
+
+            .card-header {
+                border-bottom: 1px solid #dee2e6;
+                background-color: #f8f9fa;
+                padding: 15px;
+            }
+
+            .card-header h6 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .form-control {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ced4da;
+                border-radius: 8px;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                color: white;
+                cursor: pointer;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+        </style>

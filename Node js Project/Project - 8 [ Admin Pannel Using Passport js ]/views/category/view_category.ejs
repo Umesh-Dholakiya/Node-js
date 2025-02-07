@@ -1,0 +1,79 @@
+<%- include('../header') %>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Category Table</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Author</th>
+                                    <th>Email</th>
+                                    <th>Function</th>
+                                    <th>Employee Date</th>
+                                    <th>Salary</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% categories.map(category=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= category.author %>
+                                        </td>
+                                        <td>
+                                            <%= category.email %>
+                                        </td>
+                                        <td>
+                                            <%= category.function %>
+                                        </td>
+                                        <td>
+                                            <%= category.employed %>
+                                        </td>
+                                        <td>
+                                            <%= category.salary %>
+                                        </td>
+                                        <td>
+                                            <% if(category?.status==="Online" ) { %>
+                                                <a href="/category/changestatus?id=<%= category?.id %>&status=Offline"
+                                                    class="btn btn-success btn-sm">
+                                                    <%= category?.status %>
+                                                </a>
+                                                <% } else { %>
+                                                    <a href="/category/changestatus?id=<%= category?.id %>&status=Online"
+                                                        class="btn btn-danger btn-sm">
+                                                        <%= category?.status %>
+                                                    </a>
+                                                    <% } %>
+                                        </td>
+                                        <td>
+                                            <%= category.category %>
+                                        </td>
+                                        <td>
+                                            <a href="/category/deletecategory?id=<%= category?.id %>"
+                                                class="btn btn-danger btn-sm">Delete</a>
+
+
+                                            <a href="/category/editcategory?id=<%= category?.id %>"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../footer') %>
+
+
+      

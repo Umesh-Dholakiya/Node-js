@@ -1,0 +1,84 @@
+<%- include('../header') %>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Exsubcategory Table</h6>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Author</th>
+                                    <th>Email</th>
+                                    <th>Function</th>
+                                    <th>Employee Date</th>
+                                    <th>Salary</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Subcategory</th>
+                                    <th>Exsubcategory</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% exsubcategory.map((exsubcat,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= exsubcat.author %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.email %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.function %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.employed %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.salary %>
+                                        </td>
+                                        <td>
+                                            <% if(exsubcat?.status==="Online" ) { %>
+                                                <a href="/exsubcategory/changestatus?id=<%= exsubcat?.id %>&status=Offline"
+                                                    class="btn btn-success btn-sm">
+                                                    <%= exsubcat?.status %>
+                                                </a>
+                                                <% } else { %>
+                                                    <a href="/exsubcategory/changestatus?id=<%= exsubcat?.id %>&status=Online"
+                                                        class="btn btn-danger btn-sm">
+                                                        <%= exsubcat?.status %>
+                                                    </a>
+                                                    <% } %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat?.categoryId?.category %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.subcategoryId.subcategory %>
+                                        </td>
+                                        <td>
+                                            <%= exsubcat.exsubcategory %>
+                                        </td>
+                                        <td>
+                                            <a href="/exsubcategory/deleteexsubcategory?id=<%= exsubcat?.id %>"
+                                                class="btn btn-danger btn-sm">Delete</a>
+
+
+                                            <a href="/exsubcategory/editexsubcategory?id=<%= exsubcat?.id %>"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../footer') %>
