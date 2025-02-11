@@ -5,8 +5,7 @@ var nodemailer = require('nodemailer');
 
 const LoginPage = (req, res) => {
     if(res.locals?.users){
-    return res.redirect('dashboard');
-
+        return res.redirect('dashboard');
     }
     return res.render('login');
 }
@@ -126,7 +125,7 @@ const userOtp = async (req, res) => {
         if (req.cookies.user?.otp == otp) {
             return res.redirect('/newpassword')
         } else {
-            console.log("Otp is not match");
+            console.log("OTP is not Match..");
             return res.redirect('/otp');
         }
     } catch (err) {

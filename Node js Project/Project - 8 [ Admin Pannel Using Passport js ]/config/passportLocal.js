@@ -8,9 +8,7 @@ passport.use(new passportLocal({
     usernameField: 'email',
 }, async (email, password, done) => {
     try {
-        const user = await UserModel.findOne({ email: email, password: password });
-        console.log(user);
-        
+        const user = await UserModel.findOne({ email: email, password: password });        
         if (!user) {
             console.log("Email and Password not match");
             return done(null, false);

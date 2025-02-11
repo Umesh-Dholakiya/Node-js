@@ -1,0 +1,45 @@
+<%- include('Header') %>
+
+        <div class="page-wrapper">
+            <h1 class="text-center mb-4 pt-4">Create a New Product</h1>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card card-hover">
+                            <div class="box bg-light">
+                                <form class="p-4" action="/insertproduct" method="post" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label class="form-label">Name :</label>
+                                        <input type="text" class="form-control" name="title" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Description:</label>
+                                        <textarea class="form-control" name="description" required></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">price :</label>
+                                        <input type="number" class="form-control" name="price" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Quantity :</label>
+                                        <input type="number" class="form-control" name="qty" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Image:</label>
+                                        <input type="file" class="form-control" name="image" required>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Publish Blog</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%- include('Footer') %>
