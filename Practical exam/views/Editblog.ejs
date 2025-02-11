@@ -1,12 +1,12 @@
 <%- include('Header') %>
         <div class="page-wrapper">
-            <h1 class="text-center mb-4 pt-4">Modify Product Content</h1>
+            <h1 class="text-center mb-4 pt-4">Modify Blog Content</h1>
             <div class="container-fluid">
                 <div class="row justify-content-center ">
                     <div class="col-md-6">
                         <div class="card card-hover">
                         <div class="box bg-light">
-                            <form class="p-4" action="/updateProduct" method="post" enctype="multipart/form-data">
+                            <form class="p-4" action="/updateBlog" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label class="form-label">Title:</label>
                                     <input type="text" class="form-control" name="title" value="<%= single.title %>" required>
@@ -19,7 +19,7 @@
                             
                                 <div class="mb-3">
                                     <label class="form-label">Price:</label>
-                                    <input type="number" class="form-control" name="qty" value="<%= single.price %>" required>
+                                    <input type="number" class="form-control" name="price" value="<%= single.price %>" required>
                                 </div>
 
                                 <div class="mb-3">

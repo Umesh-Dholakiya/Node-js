@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
         await UserModel.create({
             name: name,
             email: email,
-            password: password 
+            password: password // Storing plaintext password (not recommended)
         });
         console.log("You’ve successfully created your account. Please log in to continue.");
         return res.redirect('/');

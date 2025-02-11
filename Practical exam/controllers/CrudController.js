@@ -2,14 +2,14 @@ const BlogModel = require('../models/crudModel');
 const fs = require('fs');
 
 // Add blog page (render form)
-const AddProduct = (req, res) => {
-    return res.render('AddProduct');
+const AddBlog = (req, res) => {
+    return res.render('Addblog');
 };
 
 // Insert a new blog
-const insertProduct = async (req, res) => {
+const insertBlog = async (req, res) => {
     try {
-        const { title, description, price ,qty } = req.body;
+        const { title, description,price ,qty } = req.body;
         const newBlog = new BlogModel({
             title: title,
             description: description,
@@ -28,7 +28,7 @@ const insertProduct = async (req, res) => {
 };
 
 // Delete blog
-const deleteProduct = async (req, res) => {
+const deleteBlog = async (req, res) => {
     try {
         const deid = req.query.deletId;
         let single = await BlogModel.findById(deid);
@@ -43,11 +43,11 @@ const deleteProduct = async (req, res) => {
 };
 
 // Edit blog (render form for editing)
-const editProduct = async (req, res) => {
+const editBlog = async (req, res) => {
     try {
         const eid = req.query.editId;
         const single = await BlogModel.findById(eid);
-        return res.render('EditProduct', { single });
+        return res.render('Editblog', { single });
     } catch (error) {
         console.log(error);
         return false;
@@ -55,9 +55,9 @@ const editProduct = async (req, res) => {
 };
 
 // Update blog details
-const UpdateProduct = async (req, res) => {
+const UpdateBlog = async (req, res) => {
     try {
-        const { editid, title, description, price ,qty } = req.body;
+        const { editid, title, description,price, qty } = req.body;
         if (req.file) {
             const single = await BlogModel.findById(editid);
             fs.unlinkSync(single.image);
@@ -76,6 +76,7 @@ const UpdateProduct = async (req, res) => {
                 title: title,
                 description: description,
                 price: price,
+                qty: qty,
                 image: single.image
             });
             console.log("Blog updated! Your revisions are now live.");
@@ -111,5 +112,10 @@ const readmore = async (req, res) => {
 
 
 module.exports = {
-    readmore ,AddProduct , insertProduct , deleteProduct , editProduct , UpdateProduct , 
+    AddBlog,
+    insertBlog,
+    deleteBlog,
+    editBlog,
+    UpdateBlog,
+    readmore
 };

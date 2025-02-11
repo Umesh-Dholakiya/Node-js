@@ -1,66 +1,38 @@
 <%- include('Header') %>
 
-<section id="blog">
-    <% if (blogs.length===0) { %>
-        <h2 align="center" style="margin-top: 3%;">No Product Added on Dashboard</h2>
-    <% } else { %>
-        <h2 align="center" style="margin-top: 3%;">View Product</h2>
-        <div class="container">
-            <% blogs.map((blog)=> { %>
-                <div class="blog-posts h-100">
-                    <div class="blog-card h-100">
-                        <div class="image">
-                            <img src="<%= blog?.image %>" alt="Blog image">
-                        </div>
-                        <div class="content">
-                            <h3 class="title">
-                                Name : <%= blog?.title %>
-                            </h3>
-                            <p class="price">
-                                Price : <%= blog?.price %>
-                            </p>
-                            <p class="qty">
-                                Quantity : <%= blog?.qty %>
-                            </p>
-                            <p class="description">
-                                Description : <%= blog?.description.slice(0, 90) %>...
-                            </p>
-
-                            <div style="display: flex; justify-content: space-between;">
-                                <a href="/readmore?readmoreId=<%= blog?.id %>" class="read-more">Read More</a>
-                                <button class="add-to-cart" onclick="addToCart('<%= blog.id %>')">Add to Cart</button>
+    <section id="blog">
+        <% if (blogs.length===0) { %>
+            <h2 align="center" style="margin-top: 3%;">No Blog Added on Dashboard</h2>
+            <% } else { %>
+                <h2 align="center" style="margin-top: 3%;">Blog Repository</h2>
+                <div class="container">
+                    <% blogs.map((blog)=> { %>
+                        <div class="blog-posts h-100 ">
+                            <div class="blog-card h-100">
+                                <div class="image">
+                                    <img src="<%= blog?.image %>" alt="Blog image">
+                                </div>
+                                <div class="content">
+                                    <h3 class="title">
+                                        <%= blog?.title %>
+                                    </h3>
+                                    <p class="price">Price: $<%= blog.price %>
+                                    </p>
+                                    <p class="qty">Quantity: <%= blog.qty %>
+                                    </p>
+                                    <p class="description">
+                                        <%= blog?.description.slice(0, 90) %>...
+                                    </p>
+                                    <a href="/readmore?readmoreId=<%= blog?.id %>" class="read-more">Read More</a>
+                                </div>
                             </div>
-
                         </div>
-                    </div>
+                        <% }) %>
                 </div>
-            <% }) %>
-        </div>
-    <% } %>
-</section>
+                <% } %>
+    </section>
 
-<script>
-    function addToCart(productId) {
-        fetch('/cart/add', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productId, quantity: 1 })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Product added to cart!');
-                window.location.href = "/viewcart";  // Redirect to cart page after adding
-            } else {
-                alert('Failed to add product.');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-</script>
-
-<%- include('Footer') %>
-
+    <%- include('Footer') %>
 
         <style>
             /* Blog Card Container */
@@ -128,12 +100,11 @@
             /* Read More Button */
             .blog-card .read-more {
                 display: inline-block;
-                width: 40%;
+                padding: 8px 12px;
                 background-color: #6f856b;
                 color: #fff;
                 text-decoration: none;
-                font-size: 20px;
-                text-align: center;
+                font-size: 14px;
                 border-radius: 5px;
                 text-align: center;
                 transition: background-color 0.3s;
@@ -157,23 +128,5 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-            }
-
-            .add-to-cart {
-                display: block;
-                width: 50%;
-                padding: 10px;
-                background-color: #28a745;
-                color: white;
-                border: none;
-                cursor: pointer;
-                text-align: center;
-                margin-top: 10px;
-                border-radius: 5px;
-                font-size: 16px;
-            }
-
-            .add-to-cart:hover {
-                background-color: #218838;
             }
         </style>
