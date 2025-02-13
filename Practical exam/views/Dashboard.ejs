@@ -24,6 +24,7 @@
                                         <%= blog?.description.slice(0, 90) %>...
                                     </p>
                                     <a href="/readmore?readmoreId=<%= blog?.id %>" class="read-more">Read More</a>
+                                    <a class="add-to-cart-btn delete-btn read-more mt-3 fs-20" href="/addtocart?atcid=<%= blog.id %>" onclick="addToCart('<%= blog.id %>', '<%= blog.title %>', '<%= blog.price %>')"><i class="mdi mdi-cart" style="font-size: 18px;"></i> Add to Cart</a>
                                 </div>
                             </div>
                         </div>

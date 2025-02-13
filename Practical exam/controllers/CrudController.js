@@ -1,4 +1,5 @@
 const BlogModel = require('../models/crudModel');
+const addToCartModel = require('../models/cartModel')
 const fs = require('fs');
 
 // Add blog page (render form)
@@ -109,6 +110,33 @@ const readmore = async (req, res) => {
     }
 };
 
+const addToCart = async (req, res) => {
+    try {
+        let atc = req.query.atcid;
+        let userId = req.user ? req.user._id : null;
+
+
+        let cartItem = await addToCartModel.findOne({ userId, blogId: atc });
+
+        if (!cartItem) {
+            cartItem = new addToCartModel({
+                userId,
+                blogId: atc,
+                quantity: 1,
+            });
+            await cartItem.save()
+        }
+
+        const cartItems = await addToCartModel.find({ userId }).populate('blogId')
+
+        return res.render('addtocart', { cart : cartItems });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
 
 
 module.exports = {
@@ -117,5 +145,6 @@ module.exports = {
     deleteBlog,
     editBlog,
     UpdateBlog,
-    readmore
+    readmore,
+    addToCart
 };

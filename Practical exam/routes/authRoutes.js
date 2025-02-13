@@ -3,7 +3,7 @@ const multer = require('multer');
 
 
 const { LoginPage, RegisterPage, DashboardPage, registerUser, loginUser, Logout } = require('../controllers/Authcontroller');
-const { AddBlog, insertBlog, deleteBlog, editBlog, UpdateBlog, readmore  } = require('../controllers/CrudController');
+const { AddBlog, insertBlog, deleteBlog, editBlog, UpdateBlog, readmore, addToCart  } = require('../controllers/CrudController');
 
 const routes = express.Router();
 
@@ -37,5 +37,7 @@ routes.get('/deleteblog',  deleteBlog);
 routes.get('/editblog', editBlog);
 routes.post('/Updateblog', fileupload, UpdateBlog);
 routes.get('/readmore', readmore);
+routes.get('/addtocart', addToCart);
+
 
 module.exports = routes;
