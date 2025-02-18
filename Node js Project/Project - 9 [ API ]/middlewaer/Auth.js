@@ -16,7 +16,7 @@ const verifyToken = async (req, res, next) => {
 
         const newtoken = token.slice(7);
 
-        jwt.verify(newtoken, 'rohit', (err, decode) => {
+        jwt.verify(newtoken, 'umesh', (err, decode) => {
             if (err) {
                 return res.status(401).send({
                     success: false,

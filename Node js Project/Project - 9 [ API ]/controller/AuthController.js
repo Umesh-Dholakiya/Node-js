@@ -15,7 +15,7 @@ const loginUser = async (req, res) => {
                 message: 'Invalid email or password'
             })
         }
-        let token = await jwt.sign({ payload: user }, 'rohit', { expiresIn: '4hr' })
+        let token = await jwt.sign({ payload: user }, 'umesh', { expiresIn: '4hr' })
 
         return res.status(200).send({
             success: true,
